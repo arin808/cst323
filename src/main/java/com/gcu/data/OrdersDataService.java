@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -19,6 +21,7 @@ public class OrdersDataService implements DataAccessInterface<OrderModel>
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
+	Logger logger = LoggerFactory.getLogger(OrdersDataService.class);
 	public OrdersDataService(DataSource dataSource)
 	{
 		this.dataSource = dataSource;
@@ -28,6 +31,7 @@ public class OrdersDataService implements DataAccessInterface<OrderModel>
 	//Get all orders from SQL db and save as arraylist of orders
 	public List<OrderModel> getOrders()
 	{
+		logger.info("=========Accessing OrdersDataService.getOrders()=========");
 		String sql = "SELECT * FROM ORDERS";
 		List<OrderModel> orders = new ArrayList<OrderModel>();
 		try
@@ -54,6 +58,7 @@ public class OrdersDataService implements DataAccessInterface<OrderModel>
 	//Create new model; not in use in app
 	public boolean create(OrderModel order)
 	{
+		logger.info("=========Accessing OrdersDataService.create()=========");
 		String sql = "INSERT INTO ORDERS(ORDER_NO, PRODUCT_NAME, PRICE, QUANTITY) VALUES(?,?,?,?)";
 		try
 		{

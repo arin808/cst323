@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +29,17 @@ public class LoginController
 	@Autowired
 	private SecurityBusinessService security;
 	
+	Logger logger = LoggerFactory.getLogger(LoginController.class);
+	
 	@GetMapping("/")
 	public String display(Model model)
 	{
 		//Display Login form
 		model.addAttribute("title", "Login Form");
 		model.addAttribute("loginModel", new LoginModel());
+		
+		logger.info("=========Accessing LoginController.display() at path /=========");
+		
 		return "login";
 	}
 	
@@ -43,18 +50,20 @@ public class LoginController
 		if(bindingResult.hasErrors())
 		{
 			model.addAttribute("title", "Login Form");
+			logger.error("=========Error during login in LoginController.doLogin() at /doLogin=========");
 			return "login";
 		}
 		
 		//Create Order list
 		List<OrderModel> orders = service.getOrders();
+	
+		logger.info("=========Accessing LoginController.doLogin() at path /doLogin=========");
 		
 		//Bind model attributes and send to orders page
 		model.addAttribute("title", "My Orders");
 		model.addAttribute("orders", orders);
 		
 		//Security call
-		service.test();
 		security.authenticate(loginModel.getUsername(), loginModel.getPassword());
 		
 		return "orders";

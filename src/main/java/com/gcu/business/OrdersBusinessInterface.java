@@ -5,9 +5,7 @@ import com.gcu.model.OrderModel;
 
 public interface OrdersBusinessInterface
 {
-	//Print test
-	public void test();
-	
+
 	//Grab list of orders
 	public List<OrderModel> getOrders();
 	

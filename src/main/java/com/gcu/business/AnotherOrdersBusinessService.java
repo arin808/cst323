@@ -3,18 +3,16 @@ package com.gcu.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.gcu.model.OrderModel;
 
 public class AnotherOrdersBusinessService implements OrdersBusinessInterface
 {
-
-	@Override
-	public void test()
-	{
-		//Alternate print statement
-		System.out.println("Testing for AnotherOrdersBusinessService");
-	}
-
+	
+	Logger logger = LoggerFactory.getLogger(AnotherOrdersBusinessService.class);
+	
 	@Override
 	public List<OrderModel> getOrders()
 	{
@@ -32,11 +30,11 @@ public class AnotherOrdersBusinessService implements OrdersBusinessInterface
 	//Init prints message
 	public void init()
 	{
-		System.out.println("AnotherOrdersBusinessService init called");
+		logger.info("=========AnotherOrdersBusinessService init called=========");
 	}
 	//Destroy prints message
 	public void destroy()
 	{
-		System.out.println("AnotherOrdersBusinessService destroy called");
+		logger.info("=========AnotherOrdersBusinessService init called=========");
 	}
 }

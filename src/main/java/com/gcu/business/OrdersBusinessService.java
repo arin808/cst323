@@ -3,6 +3,8 @@ package com.gcu.business;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gcu.data.DataAccessInterface;
@@ -13,11 +15,7 @@ public class OrdersBusinessService implements OrdersBusinessInterface
 	@Autowired
 	private DataAccessInterface<OrderModel> service;
 	
-	@Override
-	public void test()
-	{
-		System.out.println("The test method is working if you see this");
-	}
+	Logger logger = LoggerFactory.getLogger(OrdersBusinessService.class);
 
 	@Override
 	public List<OrderModel> getOrders()
@@ -28,11 +26,11 @@ public class OrdersBusinessService implements OrdersBusinessInterface
 	//When init is called print message
 	public void init()
 	{
-		System.out.println("OrdersBusinessService init called");
+		logger.info("=========OrdersBusinessService init called=========");
 	}
 	//When app is destroyed print message
 	public void destroy()
 	{
-		System.out.println("OrdersBusinessService destroy called");
+		logger.info("=========OrdersBusinessService destroy called=========");
 	}
 }
